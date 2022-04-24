@@ -6,13 +6,26 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview ",
+    "lint": "prettier -w",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@astrojs/vue": "^0.1.1",
-    "astro": "^1.0.0-beta.12"
+    "astro": "^1.0.0-beta.12",
+    "autoprefixer": "^10.4.4",
+    "glob": "^8.0.1",
+    "husky": "^7.0.0",
+    "lint-staged": "^12.3.8",
+    "mockjs": "^1.1.0",
+    "node-polyglot": "^2.4.2",
+    "postcss-preset-env": "^7.4.3",
+    "prettier-plugin-astro": "^0.0.12",
+    "vite-plugin-inspect": "^0.5.0",
+    "vite-plugin-mock": "^2.9.6"
   },
   "dependencies": {
+    "@colorfy-software/apify": "^1.0.1",
     "vue": "^3.2.31"
   }
 }

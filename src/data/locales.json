@@ -1,0 +1,16 @@
+{
+  "locales": [
+    {
+      "language": "English",
+      "locale": "en"
+    },
+    {
+      "language": "Ukrainian",
+      "locale": "ua"
+    },
+    {
+      "language": "Russian",
+      "locale": "ru"
+    }
+  ]
+}

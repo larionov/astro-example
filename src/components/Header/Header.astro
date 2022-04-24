@@ -1,0 +1,70 @@
+---
+// import { getLanguageFromURL, getLanguageFromFilename, getSlugFromFilename, KNOWN_LANGUAGE_CODES } from '../../languages.ts
+//';
+import SkipToContent from './SkipToContent.astro';
+// import LanguageSelect from './LanguageSelect.tsx';
+
+// const currentPath = Astro.request.canonicalURL.pathname;
+// const lang = currentPath && getLanguageFromURL(currentPath);
+// const {canonicalSlug} = Astro.props;
+---
+
+<div class="header">
+  <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+    <a class="pure-menu-heading" href="">Your Site</a>
+
+    <ul class="pure-menu-list">
+      <li class="pure-menu-item pure-menu-selected">
+        <a href="#" class="pure-menu-link">Home</a>
+      </li>
+      <li class="pure-menu-item">
+        <a href="#" class="pure-menu-link">Tour</a>
+      </li>
+      <li class="pure-menu-item">
+        <a href="#" class="pure-menu-link">Sign Up</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<style>
+  /*
+ * -- MENU STYLES --
+ * I want to customize how my .pure-menu looks at the top of the page
+ */
+
+  .home-menu {
+    padding: 0.5em;
+    text-align: center;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  }
+  .home-menu {
+    background: #2d3e50;
+  }
+  .pure-menu.pure-menu-fixed {
+    /* Fixed menus normally have a border at the bottom. */
+    border-bottom: none;
+    /* I need a higher z-index here because of the scroll-over effect. */
+    z-index: 4;
+  }
+
+  .home-menu .pure-menu-heading {
+    color: white;
+    font-weight: 400;
+    font-size: 120%;
+  }
+
+  .home-menu .pure-menu-selected a {
+    color: white;
+  }
+
+  .home-menu a {
+    color: #6fbef3;
+  }
+  .home-menu li a:hover,
+  .home-menu li a:focus {
+    background: none;
+    border: none;
+    color: #aecfe5;
+  }
+</style>

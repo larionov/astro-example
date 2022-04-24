@@ -1,0 +1,250 @@
+---
+import LandingLayout from '../../layouts/LandingLayout.astro';
+import Counter from '../../components/Counter.vue';
+import RegisterForm from '../../components/RegisterForm.vue';
+import Polyglot from 'node-polyglot';
+
+import {
+  i18n,
+  getLanguageFromURL,
+  getLocales,
+  KNOWN_LANGUAGES,
+} from '../../i18n.js';
+
+export async function getStaticPaths() {
+  return Object.values(KNOWN_LANGUAGES).map((locale) => ({
+    params: { locale },
+    props: { content: { locale } },
+  }));
+}
+//console.log(Astro.canonicalURL);
+const locale = getLanguageFromURL(Astro.canonicalURL.href);
+
+// prettier-ignore
+const locales = getLocales(await import.meta.glob('./locales/*/index.json'));
+
+//const locales = getLocales(await import.meta.glob('./locales/*/index.json'));
+
+i18n.extend(locales);
+const t = i18n.t.bind(i18n);
+// await i18next.changeLanguage(Astro.props.locale);
+---
+
+<LandingLayout title="Homepage">
+  <div class="splash-container">
+    <div class="splash">
+      <div>
+        <RegisterForm client:visible {locale} />
+      </div>
+    </div>
+  </div>
+  <div class="content-wrapper">
+    <div class="content">
+      <h2 class="content-head is-center">Excepteur sint occaecat cupidatat.</h2>
+
+      <div class="pure-g">
+        <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+          <h3 class="content-subhead">
+            <i class="fa fa-rocket"></i>
+            Get Started Quickly
+          </h3>
+          <p>
+            Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse
+            sodales pellentesque elementum.
+          </p>
+        </div>
+        <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+          <h3 class="content-subhead">
+            <i class="fa fa-mobile"></i>
+            Responsive Layouts
+          </h3>
+          <p>
+            Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse
+            sodales pellentesque elementum.
+          </p>
+        </div>
+        <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+          <h3 class="content-subhead">
+            <i class="fa fa-th-large"></i>
+            Modular
+          </h3>
+          <p>
+            Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse
+            sodales pellentesque elementum.
+          </p>
+        </div>
+        <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+          <h3 class="content-subhead">
+            <i class="fa fa-check-square-o"></i>
+            Plays Nice
+          </h3>
+          <p>
+            Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse
+            sodales pellentesque elementum.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ribbon l-box-lrg pure-g">
+      <div class="l-box-lrg is-center pure-u-1 pure-u-md-1-2 pure-u-lg-2-5">
+        <img
+          width="300"
+          alt="File Icons"
+          class="pure-img-responsive"
+          src="/img/common/file-icons.png"
+        />
+      </div>
+      <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-3-5">
+        <h2 class="content-head content-head-ribbon">
+          Laboris nisi ut aliquip.
+        </h2>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor.
+        </p>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2 class="content-head is-center">
+        Dolore magna aliqua. Uis aute irure.
+      </h2>
+
+      <div class="pure-g">
+        <div class="l-box-lrg pure-u-1 pure-u-md-2-5">
+          <form class="pure-form pure-form-stacked">
+            <fieldset>
+              <label for="name2">Your Name</label>
+              <input id="name2" type="text" placeholder="Your Name" />
+
+              <label for="email">Your Email</label>
+              <input id="email" type="email" placeholder="Your Email" />
+
+              <label for="password">Your Password</label>
+              <input id="password" type="password" placeholder="Your Password"
+              />
+
+              <button type="submit" class="pure-button">Sign Up</button>
+            </fieldset>
+          </form>
+        </div>
+
+        <div class="l-box-lrg pure-u-1 pure-u-md-3-5">
+          <h4>Contact Us</h4>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+
+          <h4>More Information</h4>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <Counter client:visible>
+    <h1>Hello, Vue! {Astro.props.locale}</h1>
+  </Counter>
+</LandingLayout>
+
+<style>
+  /*
+ * -- SPLASH STYLES --
+ * This is the blue top section that appears on the page.
+ */
+
+  .splash-container {
+    background: #1f8dd6;
+    z-index: 1;
+    overflow: hidden;
+    /* The following styles are required for the "scroll-over" effect */
+    width: 100%;
+    height: 88%;
+    top: 0;
+    left: 0;
+    position: fixed !important;
+  }
+
+  .splash {
+    /* absolute center .splash within .splash-container */
+    width: 80%;
+    height: 50%;
+    margin: auto;
+    position: absolute;
+    top: 100px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  /* This is the main heading that appears on the blue section */
+  .splash-head {
+    background: #1f8dd6;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    border: 3px solid white;
+    padding: 1em 1.6em;
+    font-weight: 100;
+    border-radius: 5px;
+    line-height: 1em;
+  }
+
+  /* This is the subheading that appears on the blue section */
+  .splash-subhead {
+    color: white;
+    letter-spacing: 0.05em;
+    opacity: 0.8;
+  }
+
+  /*
+ * -- CONTENT STYLES --
+ * This represents the content area (everything below the blue section)
+ */
+  .content-wrapper {
+    /* These styles are required for the "scroll-over" effect */
+    position: absolute;
+    top: 87%;
+    width: 100%;
+    min-height: 12%;
+    z-index: 2;
+    background: white;
+  }
+
+  /* We want to give the content area some more padding */
+  .content {
+    padding: 1em 1em 3em;
+  }
+
+  /* This is the class used for the main content headers (<h2>) */
+  .content-head {
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 2em 0 1em;
+  }
+
+  /* This is a modifier class used when the content-head is inside a ribbon */
+  .content-head-ribbon {
+    color: white;
+  }
+
+  /* This is the class used for the content sub-headers (<h3>) */
+  .content-subhead {
+    color: #1f8dd6;
+  }
+  .content-subhead i {
+    margin-right: 7px;
+  }
+</style>
